@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi')
 
-// const pattern = /^([0-9]{2}):([0-9]{2})$/
-
 const trainSchema = Schema({
       departure: {
         type: Schema.Types.ObjectId,
@@ -14,23 +12,16 @@ const trainSchema = Schema({
         ref: 'stations',
         required: true
       },
-      date: {
+      departureDate: {
         type: Date,
-        default: new Date(),
+        min: new Date(),
         required: true
       },
-      hours: {
-        type: Number,
-        min: 0,
-        max: 23,
+      arrivalDate: {
+        type: Date,
+        min: new Date(),
         required: true
-      },
-      minutes: {
-        type: Number,
-        min: 0,
-        max: 59,
-        required: true
-      }
+      }, 
     },
     { versionKey: false, timestamps: true },
 );
@@ -38,9 +29,8 @@ const trainSchema = Schema({
 const trainJoiSchema = Joi.object({
 departure: Joi.string().required(),
 arrival: Joi.string().required(),
-date: Joi.date().required(),
-hours: Joi.number().min(0).max(23).required(),
-minutes: Joi.number().min(0).max(59).required(),
+departureDate: Joi.date().required(),
+arrivalDate: Joi.date().required(),
 })
 
 const Train = model('train', trainSchema);
