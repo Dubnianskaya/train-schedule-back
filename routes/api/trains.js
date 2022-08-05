@@ -11,5 +11,6 @@ router.get('/', ctrlWrapper(ctrl.getTrains));
 router.post('/add', validateMiddlewars, ctrlWrapper(ctrl.addTrain));
 router.delete('/:trainId', ctrlWrapper(ctrl.removeTrain));
 router.put('/:trainId', validateMiddlewars, ctrlWrapper(ctrl.updateTrain))
+router.get('/search', ctrlWrapper(ctrl.searchTrains));
 
 module.exports = router;
